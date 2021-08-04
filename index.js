@@ -11,7 +11,7 @@ app.use(cors());
 app.get("/characters", async (req, res) => {
   try {
     const response = await axios.get(
-      `https://lereacteur-marvel-api.netlify.app/characters?apikey=${process.env.API_KEY}`
+      `https://lereacteur-marvel-api.herokuapp.com/characters?apikey=${process.env.API_KEY}`
     );
     res.status(200).json(response.data);
   } catch (error) {
@@ -22,7 +22,7 @@ app.get("/characters", async (req, res) => {
 app.get("/comics", async (req, res) => {
   try {
     const response = await axios.get(
-      `https://lereacteur-marvel-api.netlify.app/comics?apikey=${process.env.API_KEY}`
+      `https://lereacteur-marvel-api.herokuapp.com/comics?apikey=${process.env.API_KEY}`
     );
     res.status(200).json(response);
   } catch (error) {
@@ -33,7 +33,7 @@ app.get("/comics", async (req, res) => {
 app.get("/comics/:characterId", async (req, res) => {
   try {
     const response = await axios.get(
-      `https://lereacteur-marvel-api.netlify.app/comics/${characterId}?apikey=${process.env.API_KEY}`
+      `https://lereacteur-marvel-api.herokuapp.com/comics/${characterId}?apikey=${process.env.API_KEY}`
     );
     res.status(200).json(response);
   } catch (error) {
