@@ -28,10 +28,10 @@ app.get("/comics", async (req, res) => {
   }
 });
 
-app.all("*", function (req, res) {
+app.all("*", (req, res) {
   res.status(404).json({ message: "Page not found" });
 });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("Server has started");
 });
