@@ -2,16 +2,18 @@ const express = require("express");
 const formidableMiddleware = require("express-formidable");
 const axios = require("axios");
 require("dotenv").config();
+const cors = require("cors");
 
 const app = express();
 app.use(formidableMiddleware());
+app.use(cors());
 
 app.get("/characters", async (req, res) => {
   try {
-    const characters = await axios.get(
-      "https://lereacteur-marvel-api.netlify.app/characters"
+    const response = await axios.get(
+      `https://lereacteur-marvel-api.netlify.app/characters?apikey=${process.env.API_KEY}`
     );
-    res.status(200).json(characters);
+    res.status(200).json(response.data);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -19,10 +21,21 @@ app.get("/characters", async (req, res) => {
 
 app.get("/comics", async (req, res) => {
   try {
-    const comics = await axios.get(
+    const response = await axios.get(
       `https://lereacteur-marvel-api.netlify.app/comics?apikey=${process.env.API_KEY}`
     );
-    res.status(200).json(comics);
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+app.get("/comics/:characterId", async (req, res) => {
+  try {
+    const response = await axios.get(
+      `https://lereacteur-marvel-api.netlify.app/comics/${characterId}?apikey=${process.env.API_KEY}`
+    );
+    res.status(200).json(response);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
