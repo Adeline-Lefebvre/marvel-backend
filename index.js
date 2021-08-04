@@ -1,20 +1,30 @@
 const express = require("express");
 const formidableMiddleware = require("express-formidable");
+const axios = require("axios");
+require("dotenv").config();
+
 const app = express();
 app.use(formidableMiddleware());
 
-app.get("/", (req, res) => {
-  res.json({ message: "Hi" });
+app.get("/characters", async (req, res) => {
+  try {
+    const characters = await axios.get(
+      "https://lereacteur-marvel-api.netlify.app/characters"
+    );
+    res.status(200).json(characters);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 });
 
-app.post("/", (req, res) => {
+app.get("/comics", async (req, res) => {
   try {
-    console.log(req.fields);
-    const newStudent = req.fields.name;
-    students.push(newStudent);
-    res.json(students);
+    const comics = await axios.get(
+      `https://lereacteur-marvel-api.netlify.app/comics?apikey=${process.env.API_KEY}`
+    );
+    res.status(200).json(comics);
   } catch (error) {
-    console.log(error.message);
+    res.status(400).json({ message: error.message });
   }
 });
 
