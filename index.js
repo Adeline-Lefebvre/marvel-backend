@@ -9,9 +9,11 @@ app.use(formidableMiddleware());
 app.use(cors());
 
 app.get("/characters", async (req, res) => {
+  let titleQuery = "";
+  if (req.query.title) titleQuery = `&title=${req.query.title}`;
   try {
     const response = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/characters?apiKey=${process.env.API_KEY}&limit=100&skip=${req.query.skip}`
+      `https://lereacteur-marvel-api.herokuapp.com/characters?apiKey=${process.env.API_KEY}&limit=100&skip=${req.query.skip}${titleQuery}`
     );
     res.status(200).json(response.data);
   } catch (error) {
