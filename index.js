@@ -13,7 +13,7 @@ app.get("/characters", async (req, res) => {
   //   if (req.query.title) titleQuery = `&title=${req.query.title}`;
   try {
     const response = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/characters?apiKey=${process.env.API_KEY}&limit=100&skip=${req.query.skip}&title=${req.query.title}`
+      `https://lereacteur-marvel-api.herokuapp.com/characters?apiKey=${process.env.API_KEY}&limit=100&skip=${req.query.skip}&name=${req.query.title}`
     );
     res.status(200).json(response.data);
   } catch (error) {
