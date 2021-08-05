@@ -37,7 +37,7 @@ app.get("/comics", async (req, res) => {
 app.get("/comics/:characterId", async (req, res) => {
   try {
     const response = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/comics/${characterId}?apiKey=${process.env.API_KEY}`
+      `https://lereacteur-marvel-api.herokuapp.com/comics/${req.params.characterId}?apiKey=${process.env.API_KEY}`
     );
     res.status(200).json(response);
   } catch (error) {
