@@ -22,9 +22,11 @@ app.get("/characters", async (req, res) => {
 });
 
 app.get("/comics", async (req, res) => {
+  let title = "";
+  if (req.query.title) title = `&title=${req.query.title}`;
   try {
     const response = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/comics?apiKey=${process.env.API_KEY}&skip=${req.query.skip}`
+      `https://lereacteur-marvel-api.herokuapp.com/comics?apiKey=${process.env.API_KEY}&skip=${req.query.skip}${title}`
     );
     res.status(200).json(response.data);
   } catch (error) {
